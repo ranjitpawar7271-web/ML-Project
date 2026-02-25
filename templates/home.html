@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Exam Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            width: 420px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🎓 Student Exam Predictor</h1>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+        <select name="gender" required>
+            <option disabled selected value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <select name="race_ethnicity" required>
+            <option disabled selected value="">Select Ethnicity</option>
+            <option value="group A">Group A</option>
+            <option value="group B">Group B</option>
+            <option value="group C">Group C</option>
+            <option value="group D">Group D</option>
+            <option value="group E">Group E</option>
+        </select>
+
+        <select name="parental_level_of_education" required>
+            <option disabled selected value="">Parental Education</option>
+            <option value="associate's degree">Associate's Degree</option>
+            <option value="bachelor's degree">Bachelor's Degree</option>
+            <option value="high school">High School</option>
+            <option value="master's degree">Master's Degree</option>
+            <option value="some college">Some College</option>
+            <option value="some high school">Some High School</option>
+        </select>
+
+        <select name="lunch" required>
+            <option disabled selected value="">Lunch Type</option>
+            <option value="free/reduced">Free/Reduced</option>
+            <option value="standard">Standard</option>
+        </select>
+
+        <select name="test_preparation_course" required>
+            <option disabled selected value="">Test Preparation</option>
+            <option value="none">None</option>
+            <option value="completed">Completed</option>
+        </select>
+
+        <input type="number" name="reading_score" placeholder="Reading Score (0-100)" min="0" max="100" required>
+        <input type="number" name="writing_score" placeholder="Writing Score (0-100)" min="0" max="100" required>
+
+        <button type="submit">Predict Maths Score</button>
+    </form>
+
+    {% if result is not none %}
+    <div class="result">
+        📊 Predicted Maths Score: {{ result }}
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
