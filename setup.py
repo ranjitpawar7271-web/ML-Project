@@ -13,5 +13,5 @@ setup(
     author="Ranjit Pawar",
     author_email="ranjitpawar7271@gmail.com",
     packages=find_packages(),
-    install_requires=get_requirements("req.txt"),
+    install_requires=get_requirements("requirements.txt"),
 )
